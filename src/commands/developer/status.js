@@ -1,6 +1,7 @@
-const { Discord, EmbedBuilder } = require("discord.js");
-const { GuildID } = require('../../../config.json');
+const { GuildID } = require('../../../config.json')
+const { EmbedBuilder } = require("discord.js");
 const { heapUsed } = process.memoryUsage();
+const Discord = require('discord.js')
 var osutils = require('os-utils');
 require('dotenv').config();
 
@@ -21,8 +22,8 @@ module.exports = {
         const guild = client.guilds.cache.get(GuildID);
         const self = guild.members.cache.get(process.env.SELF);
         const user = await client.users.fetch(self.id);
-        const bannerURL = user.bannerURL({ dynamic: true, size: 512 });
-        const avatarURL = user.displayAvatarURL({ dynamic: true, size: 512 });
+        const bannerURL = user.bannerURL();
+        const avatarURL = user.displayAvatarURL();
 
         osutils.cpuUsage(async function (v) {
             const uptimeInSeconds = process.uptime();
@@ -46,15 +47,17 @@ module.exports = {
                         `\`Threads:\` ${osutils.cpuCount()} Cores\n` +
                         `\`CPU Usage:\` ${v.toFixed(3)}%\n` +
                         `\`MEM Usage:\` ${(heapUsed / 1024 / 1024).toFixed(2)} MB\n` +
-                        `\`Bot Uptime:\` <t:${startTimeEpoch}:R>`
+                        `\`Bot Startedq:\` <t:${startTimeEpoch}:R>`
                 },
             ];
-
+            console.log(bannerURL)
             const embed = new EmbedBuilder()
                 .setAuthor({ name: 'ガイド₊', iconURL: avatarURL })
                 .addFields(fields)
                 .setColor('#FFFFFF')
                 .setThumbnail(bannerURL);
+
+            return interaction.reply({ embeds: [embed] });
         });
     }
 }
