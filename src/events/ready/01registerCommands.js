@@ -19,22 +19,22 @@ module.exports = async (client) => {
         if (localCommand.deleted) {
 
           await applicationCommands.delete(existingCommand.id);
-          console.log(`🟥 Deleted: "${name}"`);
+          console.log(chalk.red(`🟥 Deleted: "${name}"`));
           continue;
         }
 
         if (areCommandsDifferent(existingCommand, localCommand)) {
           await applicationCommands.edit(existingCommand.id, { description, options });
-          console.log(`🟨 Edited: "${name}"`);
+          console.log(chalk.yellow(`🟨 Edited: "${name}"`));
         }
 
       } else {
         if (localCommand.deleted) {
-          console.log(`🟪 Skipped: "${name}"`);
+          console.log(chalk.magenta(`🟪 Skipped: "${name}"`));
           continue;
         }
         await applicationCommands.create({ name, description, options, });
-        console.log(`🟩 Registered: "${name}"`);
+        console.log(chalk.green(`🟩 Registered: "${name}"`));
       }
     }
   } catch (error) {
