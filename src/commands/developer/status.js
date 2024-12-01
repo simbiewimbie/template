@@ -43,11 +43,11 @@ module.exports = {
                 {
                     name: ' ',
                     value:
-                        `\`Ping:\`${client.ws.ping} m\n` +
+                        `\`Ping:\`${client.ws.ping} ms\n` +
                         `\`Threads:\` ${osutils.cpuCount()} Cores\n` +
                         `\`CPU Usage:\` ${v.toFixed(3)}%\n` +
                         `\`MEM Usage:\` ${(heapUsed / 1024 / 1024).toFixed(2)} MB\n` +
-                        `\`Bot Startedq:\` <t:${startTimeEpoch}:R>`
+                        `\`Bot Started:\` <t:${startTimeEpoch}:R>`
                 },
             ];
             console.log(bannerURL)
